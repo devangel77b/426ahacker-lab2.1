@@ -4,9 +4,9 @@ raw <- read.csv("all.csv",header=TRUE)
 library(dplyr)
 filtered <- filter(
     raw,
-    source!="krasnopolsky",
-    source!="govardhanen",
-    2*x.m/t.s^2/9.81<0.3,
+    2*x.m/t.s^2<8, # problematic entries in krasnopolsky
+    #source!="govardhanen",
+    #2*x.m/t.s^2/9.81<0.3,
 )
 
 data <- mutate(
@@ -26,7 +26,7 @@ data2 <- mutate(
 library(svglite)
 library(scales)
 fig3 <- ggplot(data)+geom_point(aes(x=mhat,y=ahat,color=source))+
-     ylim(0,0.3)+xlim(0,0.3)+
+     ylim(0,0.8)+xlim(0,0.8)+
      geom_abline(slope=1.0,intercept=0.0,color='blue')+
      xlab('$\\hat{m}$')+
     ylab('$\\hat{a}$')+
@@ -35,10 +35,10 @@ fig3 <- ggplot(data)+geom_point(aes(x=mhat,y=ahat,color=source))+
                          labels=c("\\citet{arenas-2024-testing}",
                                   "\\citet{avalur-2024-verifying}",
                                   "\\citet{canada-2024-experimental}",
-                                  #"\\citet{govardhanen-2024-newtons}",
+                                  "\\citet{govardhanen-2024-newtons}",
                                   "\\citet{kedharnath-2024-examining}",
                                   "\\citet{kishore-2024-relationship}",
-                                  #"\\citet{krasnopolsky-2024-testing}",
+                                  "\\citet{krasnopolsky-2024-testing}",
                                   "\\citet{perle-2024-experimental}",
                                   "\\citet{yagnyeshwaran-2024-verifying}"))+
     theme_bw(base_size=8)+
@@ -57,6 +57,7 @@ summary(fit2)
 fig2 <- ggplot(data2)+geom_point(aes(x=mhat,y=ahat,color=source))+
      ylim(0,1.2)+xlim(0,1.2)+
      geom_abline(slope=1.0,intercept=0.0,color='blue')+
+     annotate("rect",xmin=0,xmax=0.75,ymin=0,ymax=0.75,color="gray",linewidth=0.35,fill=NA)+
      xlab('$\\hat{m}$')+
     ylab('$\\hat{a}$')+
     scale_color_manual(values=hue_pal()(9),

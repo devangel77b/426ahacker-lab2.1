@@ -59,6 +59,7 @@ Blah blah
 \section{Introduction}
 \begin{equation}
 \sum\vec{F} = m\vec{a}
+\label{eq:n2l}
 \end{equation}
 
 \begin{align}
@@ -66,23 +67,47 @@ T - m_1 g \mu &= m_1 a \\
 m_2 g - T &= m_2 a 
 \end{align}
 
+\cite{tipler,barrons}
 \begin{equation}
 a = \dfrac{m_2}{m_1+m_2} g - \dfrac{m_1}{m_1+m_2} \mu g
 \end{equation}
-Defining $a = g \hat{x}$ and $\hat{m} = \dfrac{m_2}{m_1+m_2}$
+
+Constant force: \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying}
+
+Changing force: \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing}
+
+Did not vary: \cite{perle-2024-experimental}
+
+No means to measure accceleration: \cite{barone-2024-investigating}
+
+Exceed $g$ \cite{krasnopolsky-2024-testing}
+Excessive friction or incorrect $m_1$ \cite{govardhanen-2024-newtons}, we use their data but with $m_1=\qty{2.5}{\kilo\gram}$.
+
+
+Defining $\hat{a} = \dfrac{a}{g}$ and $\hat{m} = \dfrac{m_2}{m_1+m_2}$
 \begin{equation}
 \hat{a} = \hat{m} - (1-\hat{m}) \mu
 \end{equation}
 \begin{equation}
 \hat{a} = (1+\mu) \hat{m} - \mu
 \end{equation}
-
 \begin{equation}
 \hat{a} = 
 \begin{cases}
 (1+\mu) \hat{m} - \mu & \hat{m} \geq \dfrac{\mu}{1+\mu} \\
 0 & \hat{m} < \dfrac{\mu}{1+\mu} 
 \end{cases}
+\end{equation}
+The condition $\hat{m}=\dfrac{\mu}{1+\mu}$ is equivalent to $m_2=\mu m_1$; below this critical value static friction will keep the system from moving. 
+
+For the case of no friction,
+\begin{equation}
+a = \dfrac{m_2}{m_1+m_2} g 
+\label{eq:nofricdimensional}
+\end{equation}
+\begin{equation}
+\hat{a} = \hat{m}
+\label{eq:nofricdimensionless}
 \end{equation}
 
 \section{Methods and materials}
@@ -91,13 +116,14 @@ Defining $a = g \hat{x}$ and $\hat{m} = \dfrac{m_2}{m_1+m_2}$
 \section{Results}
 \begin{figure*}
 \includesvg{fig2.svg}
-\caption{Blah}
+\caption{Blah. Data from \cite{krasnopolsky-2024-testing} at highest two values of $m_2$ show timing issues with very short times and results that exceed the acceleration of gravity and so are removed from further analyses. Best fit line is $\hat{a}=0.948\hat{m}$ (linear regression, $R^2=0.9777$, $df=95$, $p<2e-16$), slope is not significantly different from 1.0 ($t$-test, $p=0.227$), providing support for \cref{eq:nofricdimensional,eq:nofricdimensionless,eq:n2l}.}
 \end{figure*}
 
-\begin{figure*}
-\includesvg{fig3.svg}
-\caption{Blah}
-\end{figure*}
+%\begin{figure*}
+%\includesvg{fig3.svg}
+%\caption{Blah. }
+%\end{figure*}
+
 \section{Discussion}
 \section{Acknowledgements}
 \bibliography{hacker.bib}
