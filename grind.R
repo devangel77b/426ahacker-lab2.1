@@ -1,5 +1,5 @@
 library(ggplot2)
-raw <- read.csv("kedharnath.csv",header=TRUE)
+raw <- read.csv("all.csv",header=TRUE)
 
 library(dplyr)
 data <- mutate(
@@ -13,7 +13,7 @@ apredicted.ms2 <- function(m2,m1,mc){
   9.81*m2/(m2+m1+mc)
 }
 
-fig <- ggplot(data)+geom_point(aes(x=m2.kg,y=ameas.ms2))+
+fig <- ggplot(data)+geom_point(aes(x=m2.kg,y=ameas.ms2,color=source))+
     ylim(0,4)+xlim(0,0.5)+
     geom_function(fun=apredicted.ms2,args=list(m1=0.280,mc=0.5),color='blue')+
     xlab('$m_2$ (\\unit{\\kilo\\gram})')+
@@ -26,9 +26,9 @@ print(fig)
 dev.off()
 
 
-fig2 <- ggplot(data)+geom_point(aes(x=mhat,y=ameas.ms2))+
-     ylim(0,5)+xlim(0,0.5)+
-     geom_abline(slope=8.95,color='blue')+
+fig2 <- ggplot(data)+geom_point(aes(x=mhat,y=ahat,color=source))+
+     ylim(0,0.5)+xlim(0,0.5)+
+     geom_abline(slope=1.2,intercept=-0.02,color='blue')+
      xlab('$\\frac{m_2}{m_1+m_2+m_c}$')+
      ylab('$a$ (\\unit{\\meter\\per\\second\\squared})')+
      theme_bw(base_size=8)
@@ -48,5 +48,5 @@ print(xtable(results),include.rownames=FALSE,file='table1raw.tex')
 
 
 
-fit <- lm(ameas.ms2~mhat-1,data)
+fit <- lm(ahat~mhat-1,data)
 summary(fit)
