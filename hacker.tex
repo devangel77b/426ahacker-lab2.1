@@ -15,7 +15,7 @@
 \usepackage{svg}
 % set PDF metadata
 \hypersetup{%
-pdftitle={Testing Newton's second law with a cart-pulley system: a meta-analysis},
+pdftitle={Testing Newton's second law with a half-Atwood machine: a meta-analysis},
 pdfauthor={Alyssa P.~Hacker and Benjamin Bitdiddle},
 }
 \usepackage{fancyhdr}
@@ -36,7 +36,7 @@ pdfauthor={Alyssa P.~Hacker and Benjamin Bitdiddle},
 
 \begin{document}
 \setcounter{page}{1}
-\title{Testing Newton's second law with a cart-pulley system: a meta-analysis}
+\title{Testing Newton's second law with a half-Atwood machine: a meta-analysis}
 
 \author{Alyssa P.~Hacker}
 \email{Contact author: 426ahacker@frhsd.com}
@@ -57,66 +57,73 @@ Blah blah
 
 
 \section{Introduction}
+Newton's second law states that the sum of the forces is equal to the time rate of change of momentum \cite{newton1687principia}; for systems where mass is constant this is commonly written as \cite{tipler, barrons}:
 \begin{equation}
-\sum\vec{F} = m\vec{a}
+\sum\vec{F} = m\vec{a}.
 \label{eq:n2l}
 \end{equation}
 
+To verify \cref{eq:n2l}, it is typical apply the same constant force to different masses and observe the resulting acceleration to check for inverse proportionality \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying}; or alternatively to subject a mass to different forces and check the acceleration is proportional \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing}. A common experimental setup is to use a half-Atwood machine (\cref{fig:setup}) to allow systematically varying either the force or the system mass with other factors held constant. 
+\begin{figure}
+\caption{\label{fig:setup} Setup here}
+\end{figure}
+
+For the system in \cref{fig:setup}, the equations of motion can be easily derived by writing Newton's second law for both the cart and the hanging mass \cite{tipler, barrons}:
 \begin{align}
-T - m_1 g \mu &= m_1 a \\
-m_2 g - T &= m_2 a 
+T - m_1 g \mu &= m_1 a, \label{eq:cart}\\
+m_2 g - T &= m_2 a, \label{eq:hanging}
 \end{align}
-
-\cite{tipler,barrons}
+where $T$ is tension in the string, $g=\qty{9.81}{\meter\per\second\squared}$ is the acceleration of gravity, and $\mu$ is a coefficient of friction associated with the cart. Combining \cref{eq:cart,eq:hanging} gives the acceleration of the system \cite{tipler,barrons}:
 \begin{equation}
-a = \dfrac{m_2}{m_1+m_2} g - \dfrac{m_1}{m_1+m_2} \mu g
+a = \dfrac{m_2}{m_1+m_2} g - \dfrac{m_1}{m_1+m_2} \mu g.
+\label{eq:fricdimensional}
 \end{equation}
 
-Constant force: \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying}
+Several studies have recently tested the validity of \cref{eq:n2l}, including studies conducted with constant force and varying cart mass  \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying}, as well as studies in which the hanging mass provided varying external force on the system \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing}. Curiously, all the studies \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing} conducted with varying force ($m_2g$) also had varying total system mass $m_1+m_2$, potentially confounding the effects of force versus mass. \cite{perle-2024-experimental} did not systematically vary $m_1$ or $m_2$ and was limited in conclusions regarding \cref{eq:n2l}; while \cite{barone-2024-investigating} had no means to measure accceleration. \cite{krasnopolsky-2024-testing} exceeded the acceleration of gravity $g$ in observed results, while \cite{govardhanen-2024-newtons} observed extremely low values of system acceleration, possibly due to incorrectly recorded mass $m_1$. Many studies also suffered from having only minimal replicates of measured data. All \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying,govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing,perle-2024-experimental} claimed to be affected by friction; some also noted timing inaccuracies, factors related to the clean release of the system from rest, and various other ``human error[s]'' as sources of experimental error. 
 
-Changing force: \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing}
+Here, we wish to combine the results of \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying,govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing,perle-2024-experimental}. The combined dataset could potentially overcome many of the shortfalls of each individual study, including items like release, timing inaccuracies, and ``human error'' since these are presumably randomized out among the different workers. With a larger dataset it may also be possible to test the claim the friction affected the results.  Since some previous studies \cite{arenas-2024-testing,avalur-2024-verifying,canada-2024-experimental,kishore-2024-relationship,yagnyeshwaran-2024-verifying} were done with constant force, while others were done with varying hanging mass \cite{govardhanen-2024-newtons,kedharnath-2024-examining,krasnopolsky-2024-testing}, we nondimensionalize \cref{eq:fricdimensional}, to combine the various datasets into a single coherent picture and collapse four independent variables ($m_1$, $m_2$, $g$, and $\mu$) into two ($\hat{m}$, $\mu$). 
 
-Did not vary: \cite{perle-2024-experimental}
-
-No means to measure accceleration: \cite{barone-2024-investigating}
-
-Exceed $g$ \cite{krasnopolsky-2024-testing}
-Excessive friction or incorrect $m_1$ \cite{govardhanen-2024-newtons}, we use their data but with $m_1=\qty{2.5}{\kilo\gram}$.
-
-
-Defining $\hat{a} = \dfrac{a}{g}$ and $\hat{m} = \dfrac{m_2}{m_1+m_2}$
+Defining nondimensional system acceleration $\hat{a} = \dfrac{a}{g}$ and nondimensional hanging mass $\hat{m} = \dfrac{m_2}{m_1+m_2}$ gives
 \begin{equation}
-\hat{a} = \hat{m} - (1-\hat{m}) \mu
+\hat{a} = \hat{m} - (1-\hat{m}) \mu,
 \end{equation}
 \begin{equation}
-\hat{a} = (1+\mu) \hat{m} - \mu
+\hat{a} = (1+\mu) \hat{m} - \mu,
 \end{equation}
 \begin{equation}
 \hat{a} = 
 \begin{cases}
-(1+\mu) \hat{m} - \mu & \hat{m} \geq \dfrac{\mu}{1+\mu} \\
-0 & \hat{m} < \dfrac{\mu}{1+\mu} 
+(1+\mu) \hat{m} - \mu & \hat{m} \geq \dfrac{\mu}{1+\mu}, \\
+0 & \hat{m} < \dfrac{\mu}{1+\mu}.
 \end{cases}
+\label{eq:fricdimensionless}
 \end{equation}
 The condition $\hat{m}=\dfrac{\mu}{1+\mu}$ is equivalent to $m_2=\mu m_1$; below this critical value static friction will keep the system from moving. 
 
-For the case of no friction,
+For the case of no friction, \cref{eq:fricdimensional} reduces to
 \begin{equation}
-a = \dfrac{m_2}{m_1+m_2} g 
+a = \dfrac{m_2}{m_1+m_2} g,
 \label{eq:nofricdimensional}
 \end{equation}
+while \cref{eq:fricdimensionless} becomes
 \begin{equation}
-\hat{a} = \hat{m}
+\hat{a} = \hat{m}.
 \label{eq:nofricdimensionless}
 \end{equation}
 
+\Cref{fig:prediction} shows predictions for $\hat{a}$ based on whether friction is significant \cref{eq:fricdimensionless} or not \cref{eq:nofricdimensionless}. If the measured data fail to follow either of these relationships, then the models from \cref{eq:fricdimensional} are wrong, indicating either missing or unmodeled forces or that \cref{eq:n2l} is invalid. 
+\begin{figure}
+\caption{\label{fig:prediction} Add prediction figure here showing \cref{eq:fricdimensionless} and \cref{eq:nofricdimensionless}.}
+\end{figure}
+
 \section{Methods and materials}
 \cite{R-2024,ggplot2-2024}
+%, we use their data but with $m_1=\qty{2.5}{\kilo\gram}$.
 
 \section{Results}
 \begin{figure*}
 \includesvg{fig2.svg}
-\caption{Blah. Data from \cite{krasnopolsky-2024-testing} at highest two values of $m_2$ show timing issues with very short times and results that exceed the acceleration of gravity and so are removed from further analyses. Best fit line is $\hat{a}=0.948\hat{m}$ (linear regression, $R^2=0.9777$, $df=95$, $p<\num{2e-16}$), slope is not significantly different from 1.0 ($t$-test, $p=0.227$), providing support for \cref{eq:nofricdimensional,eq:nofricdimensionless,eq:n2l}.}
+\caption{Best fit line is $\hat{a}=0.98\hat{m}$ (linear regression, $R^2=0.9777$, $df=95$, $p<\num{2e-16}$), slope is not significantly different from 1.0 ($t$-test, $p=0.227$), providing support for \cref{eq:nofricdimensional,eq:nofricdimensionless,eq:n2l}. Data from \cite{govardhanen-2024-newtons} uses corrected value of $m_1=\qty{2.5}{\kilo\gram}$. Data from \cite{krasnopolsky-2024-testing} at highest two values of $m_2$ (top, right) show timing issues with very short times and results that exceed the acceleration of gravity and so are removed from analysis. Gray box shows area where analysis is valid.}
 \end{figure*}
 
 %\begin{figure*}
