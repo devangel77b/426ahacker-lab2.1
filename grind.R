@@ -5,8 +5,8 @@ library(dplyr)
 filtered <- filter(
     raw,
     source!="krasnopolsky",
-    source!="govardhanen",
-    2*x.m/t.s^2/9.81<0.3,
+    #source!="govardhanen",
+    #2*x.m/t.s^2/9.81<0.3,
 )
 
 data <- mutate(
@@ -35,7 +35,7 @@ fig3 <- ggplot(data)+geom_point(aes(x=mhat,y=ahat,color=source))+
                          labels=c("\\citet{arenas-2024-testing}",
                                   "\\citet{avalur-2024-verifying}",
                                   "\\citet{canada-2024-experimental}",
-                                  #"\\citet{govardhanen-2024-newtons}",
+                                  "\\citet{govardhanen-2024-newtons}",
                                   "\\citet{kedharnath-2024-examining}",
                                   "\\citet{kishore-2024-relationship}",
                                   #"\\citet{krasnopolsky-2024-testing}",
